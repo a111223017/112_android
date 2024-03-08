@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
     public  void bt_zero_click(View view)
     {
         int count;
-        TextView output= (TextView) findViewById(R.id.txtcounter);//找到txtview直傳回id
+        TextView output= (TextView) findViewById(R.id.txtcounter);
 
-        output.setText(R.string.ini_value);//裡面必須是字串 把數字轉換成字串
+        output.setText(R.string.ini_value);
 
 
     }
