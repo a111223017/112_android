@@ -31,4 +31,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    public  void bt_reduce_click(View view)
+    {
+        int count;
+        TextView output= (TextView) findViewById(R.id.txtcounter);//找到txtview直傳回id
+        count =Integer.parseInt(output.getText().toString());//傳成整數
+        count--;
+        output.setText(Integer.toString(count));//裡面必須是字串 把數字轉換成字串
+
+    }
 }
