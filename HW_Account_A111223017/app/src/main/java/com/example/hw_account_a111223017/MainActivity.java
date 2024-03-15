@@ -21,14 +21,14 @@ public class MainActivity extends AppCompatActivity {
         TextView txvShow = (TextView)findViewById(R.id.txvShow);
         String txtaccount = edtAccount.getText().toString();
         String txtpassword  =(edtpassword.getText().toString());
-        if(txtaccount=="1" && txtpassword=="1")
+        if(txtaccount.contains("李逸晨") &&txtpassword.contains("111223017") )
         {
 
             txvShow.setText("登入成功");
         }
         else
         {
-            txvShow.setText("登入..."+txtaccount+txtpassword);
+            txvShow.setText("登入失敗");
         }
 
 
