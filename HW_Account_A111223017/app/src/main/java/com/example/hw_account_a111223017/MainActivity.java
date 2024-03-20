@@ -19,17 +19,20 @@ public class MainActivity extends AppCompatActivity {
         EditText edtAccount = (EditText)findViewById(R.id.edtaccount);//建立關聯
         EditText edtpassword = (EditText)findViewById(R.id.edtpassword);//建立關聯
         TextView txvShow = (TextView)findViewById(R.id.txvShow);
-        String txtaccount = edtAccount.getText().toString();
-        String txtpassword  =(edtpassword.getText().toString());
-        if(txtaccount.contains("李逸晨") &&txtpassword.contains("111223017") )
-        {
 
+        String txtaccount = edtAccount.getText().toString();
+        String txtpassword  = edtpassword.getText().toString();
+
+        if(txtaccount.equals("李逸晨") && txtpassword.equals("111223017")) {
             txvShow.setText("登入成功");
-        }
-        else
-        {
+        } else if (txtaccount.equals("李逸晨") && !txtpassword.equals("111223017")) {
+            txvShow.setText("密碼錯誤");
+        } else if (!txtaccount.equals("李逸晨") && txtpassword.equals("111223017")) {
+            txvShow.setText("帳號錯誤");
+        } else {
             txvShow.setText("登入失敗");
         }
+
 
 
     }
