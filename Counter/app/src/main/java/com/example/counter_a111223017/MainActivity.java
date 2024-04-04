@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     public  void bt_add_click(View view)
     {
     int count;
+
     TextView output= (TextView) findViewById(R.id.txtcounter);//找到txtview直傳回id
     count =Integer.parseInt(output.getText().toString());//傳成整數
     count++;
