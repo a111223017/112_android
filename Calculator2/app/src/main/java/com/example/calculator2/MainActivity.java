@@ -1,6 +1,8 @@
-package com.example.calculator;
+package com.example.calculator2;
 
+import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -8,11 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-//bmi沒辦法除0x0 的另外狀況
-//改計算機的style 按鈕 加分 可以額外處理小數的運算 浮點數的運算
 
 enum State {FirstNumberInput, OperatorInputed, NumberInput, DecimalInput}
 enum OP { None, Add, Sub, Mul, Div,Dec}
@@ -33,14 +31,40 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        GridLayout keysGL = (GridLayout) findViewById(R.id.keys);
+        int kbHeight = (int) (keysGL.getHeight() / keysGL.getRowCount());
+        int kbWidth = (int) (keysGL.getWidth()/keysGL.getColumnCount());
+
+        Log.v("value","kbheight_after"+kbHeight);
+        Log.v("value","kbheight_after"+kbWidth);
+    }
+    @Override
+    protected  void  onPause() {
+
+
+        super.onPause();
+        SharedPreferences appsharepref  = getSharedPreferences("pre_value",MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = appsharepref.edit();
+        prefsEditor.putString("newItem",(new Integer(tempinput)).toString());
+        prefsEditor.commit();
+    }
+    @Override
+    protected  void  onResume() {
+
+
+        super.onResume();
+
+        SharedPreferences appshareprefs = getSharedPreferences("pre_value", MODE_PRIVATE);
+        theValue=(new  Integer((appshareprefs.getString("newItem","0"))));
     }
 
-     public void onWindowFocusChanged (boolean hasFocus) {
+    public void onWindowFocusChanged (boolean hasFocus) {
         GridLayout keysGL = (GridLayout) findViewById(R.id.keys);
 
         int kbHeight = (int) (keysGL.getHeight() / keysGL.getRowCount());
         int kbWidth = (int) (keysGL.getWidth()/keysGL.getColumnCount());
-
+        Log.v("value","kbheight_after"+kbHeight);
+        Log.v("value","kbheight_after"+kbWidth);
         Button btn;
 
         for( int i=0; i< keysGL.getChildCount();i++){
@@ -49,8 +73,9 @@ public class MainActivity extends AppCompatActivity {
             btn.setWidth(kbWidth);
             btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 36 );
         }
-
-     }
+        EditText edt = (EditText) findViewById(R.id.display);
+        edt.setText((CharSequence) (""+theValue));
+    }
     public void processKeyInput(View view){
         tempDecimalInput = "";
 
@@ -127,15 +152,15 @@ public class MainActivity extends AppCompatActivity {
             case "*":
             case "/": // 當operator被點選時
                 switch(bstr) {
-                            case "+": op=OP.Add; break;
-                            case "-": op=OP.Sub; break;
-                            case "*": op=OP.Mul; break;
-                            case "/": op=OP.Div; break;
+                    case "+": op=OP.Add; break;
+                    case "-": op=OP.Sub; break;
+                    case "*": op=OP.Mul; break;
+                    case "/": op=OP.Div; break;
                 }
 
-                    tempinput2=tempinput;
-                    tempinput="";
-                    edt.setText("" + tempinput);
+                tempinput2=tempinput;
+                tempinput="";
+                edt.setText("" + tempinput);
 
 
 
