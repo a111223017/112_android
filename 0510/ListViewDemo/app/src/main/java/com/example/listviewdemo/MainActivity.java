@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
         private ListView lv;
@@ -29,9 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView output = (TextView) findViewById(R.id.lblOutput);
-                String cities = lv.getSelectedItem().toString();
-                output.setText("你是住在"+cities);
+                TextView output = findViewById(R.id.lblOutput);
+                String selectedCity = parent.getItemAtPosition(position).toString();
+                output.setText("你是住在" + selectedCity);
+                Toast.makeText(MainActivity.this, "你是住在: " + selectedCity, Toast.LENGTH_SHORT).show();
             }
         });
     }
